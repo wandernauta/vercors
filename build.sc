@@ -562,6 +562,18 @@ object vercors extends Module {
     object test extends Tests
   }
 
+  object avalanche extends VercorsModule {
+    def key = "avalanche"
+    def name = "AValAnCHE"
+    def mainClass = Some("vct.avalanche.AValAnCHE")
+
+    def deps = Agg(
+      ivy"com.code-intelligence:jazzer-junit:0.22.1",
+      ivy"org.eclipse.angus:jakarta.mail:2.0.3",
+    )
+    override def moduleDeps = Seq(main)
+  }
+
   object main extends VercorsModule {
     def key = "main"
     def name = "VerCors"
