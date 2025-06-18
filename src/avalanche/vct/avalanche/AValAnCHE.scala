@@ -4,7 +4,6 @@ import com.code_intelligence.jazzer.Jazzer
 import com.code_intelligence.jazzer.api.BugDetectors
 import com.code_intelligence.jazzer.instrumentor.CoverageRecorder
 import com.code_intelligence.jazzer.third_party.org.jacoco.core.data.ExecutionDataReader
-import com.google.common.reflect.ClassPath
 import jakarta.mail.{Message, Session}
 import jakarta.mail.internet.{InternetAddress, MimeBodyPart, MimeMessage, MimeMultipart}
 import ujson.Obj
@@ -83,18 +82,6 @@ object AValAnCHE {
 
   @nowarn("cat=unused") // Not unused; called indirectly by Jazzer
   def fuzzerTestOneInput(seed: Array[Byte]): Unit = {
-    if (total == 0) {
-      ClassPath.from(this.getClass.getClassLoader).getAllClasses.forEach(x => {
-        try {
-          if (x.getSimpleName != "Zer")
-            x.load().newInstance().toString
-        } catch {
-          case e: Throwable => {
-          }
-        }
-      })
-    }
-
     total += 1
     val f = File.createTempFile("avalanche", ".txt")
 
